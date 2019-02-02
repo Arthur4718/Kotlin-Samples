@@ -62,18 +62,12 @@ class MainActivity : AppCompatActivity() {
                     val response = connection.responseCode
                     Log.d(TAG, "downloadXML: The response code $response")
 
-                    val reader = BufferedReader(InputStreamReader(connection.inputStream))
 
-                    val inputBuffer = CharArray(500)
-                    var charsRead = 0
-                    while(charsRead >= 0 ){
-                        charsRead = reader.read(inputBuffer)
-                        if(charsRead > 0){
-                            xmlResult.append(String(inputBuffer, 0 , charsRead))
-                        }
-
+                    val stream = connection.inputStream
+                    stream.buffered().reader().use { reader ->
+                        xmlResult.append(reader.readText())
                     }
-                    reader.close()
+
                     Log.d(TAG, "Receiveid ${xmlResult.length} bytes")
                     return xmlResult.toString()
 
