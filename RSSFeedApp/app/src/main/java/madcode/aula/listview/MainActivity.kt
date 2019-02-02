@@ -62,9 +62,6 @@ class MainActivity : AppCompatActivity() {
                     val response = connection.responseCode
                     Log.d(TAG, "downloadXML: The response code $response")
 
-//            val inputStream = connection.inputStream
-//            val inputStreamReader = InputStreamReader(inputStream)
-//            val reader = BufferedReader(inputStreamReader) LIne 65 can do all this work lone
                     val reader = BufferedReader(InputStreamReader(connection.inputStream))
 
                     val inputBuffer = CharArray(500)
@@ -90,6 +87,8 @@ class MainActivity : AppCompatActivity() {
                         }
                         else -> "Unknown error: ${e.message}"
                     }
+
+
                 }
 
 
