@@ -81,13 +81,16 @@ class MainActivity : AppCompatActivity() {
                     return xmlResult.toString()
 
                 }catch (e : MalformedURLException){
-                    //Catch if the url is a bad one
+                    //Catch if the url is a bad one - preveting a crash
                     Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
                 }catch (e : IOException){
-                    //Catch if there is a problem with our connection
+                    //Catch if there is a problem with our connection - preveting a crash
                     Log.e(TAG, "downloadXML: IO Exception while reading data ${e.message}")
+                }catch (e : SecurityException){
+                    //Catch if there is a problem with our connection - preveting a crash
+                    Log.e(TAG, "downloadXML: Needs permission to use internet ${e.message}")
                 }catch (e : Exception){
-                    //Catch if there is a problem with our connection
+                    //Catch if there is a problem with our connection - preveting a crash
                     Log.e(TAG, "downloadXML: Unknow error ${e.message}")
                 }
                 //If something goes wrong then there is nothing to show.
