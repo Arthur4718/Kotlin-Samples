@@ -80,19 +80,19 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "Receiveid ${xmlResult.length} bytes")
                     return xmlResult.toString()
 
-                }catch (e : MalformedURLException){
-                    //Catch if the url is a bad one - preveting a crash
-                    Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
-                }catch (e : IOException){
-                    //Catch if there is a problem with our connection - preveting a crash
-                    Log.e(TAG, "downloadXML: IO Exception while reading data ${e.message}")
-                }catch (e : SecurityException){
-                    //Catch if there is a problem with our connection - preveting a crash
-                    Log.e(TAG, "downloadXML: Needs permission to use internet ${e.message}")
-                }catch (e : Exception){
-                    //Catch if there is a problem with our connection - preveting a crash
-                    Log.e(TAG, "downloadXML: Unknow error ${e.message}")
+                }catch (e: Exception) {
+                    val errorMessage: String = when (e) {
+
+                        is MalformedURLException -> "downloadXML: Invalid URL ${e.message}"
+                        is IOException -> "downloadXML: IO Exception reading data: ${e.message}"
+                        is SecurityException -> { e.printStackTrace()
+                            "downloadXML: Security Exception. Needs permission? ${e.message}"
+                        }
+                        else -> "Unknown error: ${e.message}"
+                    }
                 }
+
+
                 //If something goes wrong then there is nothing to show.
                 return ""
             }
