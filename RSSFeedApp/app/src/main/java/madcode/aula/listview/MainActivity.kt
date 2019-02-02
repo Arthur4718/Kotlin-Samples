@@ -4,16 +4,29 @@ import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.lang.Exception
-import java.lang.StringBuilder
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
 import java.net.URL
 
 const val URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+
+class FeedEntry{
+
+    //Data model for the data coming from the RSS Reed
+    var title : String = ""
+    var artist : String = ""
+    var summary : String = ""
+    var creator : String = ""
+    var releaseDat : String = ""
+
+    override fun toString(): String {
+        return """
+            title = $title
+            artist = $artist
+            creator = $creator
+            releaseDat = $releaseDat
+            """.trimIndent()
+
+    }
+}
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -52,44 +65,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             private fun downloadXML(urlPath: String?): String {
-                //Used to concatenate a lot of strings
-                val xmlResult = StringBuilder()
-
-                try {
-                    //If we have a connection
-                    val url = URL(urlPath)
-                    val connection : HttpURLConnection = url.openConnection() as HttpURLConnection
-                    val response = connection.responseCode
-                    Log.d(TAG, "downloadXML: The response code $response")
-
-
-                    val stream = connection.inputStream
-                    stream.buffered().reader().use { reader ->
-                        xmlResult.append(reader.readText())
-                    }
-
-                    Log.d(TAG, "Receiveid ${xmlResult.length} bytes")
-                    return xmlResult.toString()
-
-                }catch (e: Exception) {
-                    val errorMessage: String = when (e) {
-
-                        is MalformedURLException -> "downloadXML: Invalid URL ${e.message}"
-                        is IOException -> "downloadXML: IO Exception reading data: ${e.message}"
-                        is SecurityException -> { e.printStackTrace()
-                            "downloadXML: Security Exception. Needs permission? ${e.message}"
-                        }
-                        else -> "Unknown error: ${e.message}"
-                    }
-
-
-                }
-
-
-                //If something goes wrong then there is nothing to show.
-                return ""
+                return URL(urlPath).readText()
             }
-
 
         }
     }
