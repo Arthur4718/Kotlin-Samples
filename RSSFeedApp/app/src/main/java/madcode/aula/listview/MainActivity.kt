@@ -75,9 +75,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "OnPostExecute: parameter is $result")
                 val parserApplications = ParseApplications()
                 parserApplications.parse(result)
-                //Creating adapter
-                val arrayAdapter = ArrayAdapter<FeedEntry>(propContext, R.layout.list_item, parserApplications.applications)
-                propListView.adapter = arrayAdapter
+                //Creating adapter and fedding the list
+//                val arrayAdapter = ArrayAdapter<FeedEntry>(propContext, R.layout.list_item, parserApplications.applications)
+//                propListView.adapter = arrayAdapter
+                //Usinga custom Adapter and fedding the list
+                val feedAdapter = FeedAdapter(propContext, R.layout.list_record, parserApplications.applications)
+                propListView.adapter = feedAdapter
             }
 
             override fun doInBackground(vararg url: String?): String {
