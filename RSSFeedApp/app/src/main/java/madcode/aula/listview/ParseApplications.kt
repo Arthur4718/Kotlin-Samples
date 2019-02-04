@@ -23,9 +23,9 @@ class ParseApplications {
             xpp.setInput(xmlData.reader())
             var eventType = xpp.eventType
             var currentRecord = FeedEntry()
-            while (eventType != XmlPullParser.END_DOCUMENT){
+            while (eventType != XmlPullParser.END_DOCUMENT){ // Continue searching the entire XML document for relevant tags
 
-               val tagName = xpp.name.toLowerCase() // TODO we should to the safe call ?
+               val tagName = xpp.name?.toLowerCase()
                 when(eventType){
                     XmlPullParser.START_TAG -> {
                          Log.d(TAG, "parse : Starting tag for " + tagName)
@@ -33,7 +33,7 @@ class ParseApplications {
                              inEntry = true
                          }
                     }
-                    XmlPullParser.TEXT -> textValue = xpp.text
+                    XmlPullParser.TEXT -> textValue = xpp.text // parse looking for the right data
 
                     XmlPullParser.END_TAG ->{
                         Log.d(TAG, "parse: Ending tag for " + tagName)
@@ -46,6 +46,7 @@ class ParseApplications {
                                     currentRecord = FeedEntry() //Create a new object from the feedlist
 
                                 }
+                                //Geetting the fields from the XML file that we are interested
                                 "name" -> currentRecord.name = textValue
                                 "artist" -> currentRecord.artist = textValue
                                 "releaseDate" -> currentRecord.releaseDate = textValue
@@ -56,8 +57,13 @@ class ParseApplications {
                         }
                     }
                 }
+                eventType = xpp.next()
             }
-
+            //Print and end of file marker to logcat to every entry.
+            for (app in applications) {
+                Log.d(TAG,"*******************")
+                Log.d(TAG,app.toString())
+            }
         }catch (e : Exception){
             e.printStackTrace()
             //Something went wrong, change status

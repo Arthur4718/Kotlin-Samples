@@ -47,9 +47,11 @@ class MainActivity : AppCompatActivity() {
         private class DownloadData: AsyncTask<String, Void, String>(){
             private val TAG = "DownloadData"
 
-            override fun onPostExecute(result: String?) {
+            override fun onPostExecute(result: String) {
                 super.onPostExecute(result)
-                Log.d(TAG, "OnPostExecute: parameter is $result")
+//                Log.d(TAG, "OnPostExecute: parameter is $result")
+                val parserApplications = ParseApplications()
+                parserApplications.parse(result)
             }
 
             override fun doInBackground(vararg url: String?): String {
