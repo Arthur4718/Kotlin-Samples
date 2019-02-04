@@ -25,8 +25,38 @@ class ParseApplications {
             var currentRecord = FeedEntry()
             while (eventType != XmlPullParser.END_DOCUMENT){
 
-            }
+               val tagName = xpp.name.toLowerCase() // TODO we should to the safe call ?
+                when(eventType){
+                    XmlPullParser.START_TAG -> {
+                         Log.d(TAG, "parse : Starting tag for " + tagName)
+                         if(tagName == "entry"){
+                             inEntry = true
+                         }
+                    }
+                    XmlPullParser.TEXT -> textValue = xpp.text
 
+                    XmlPullParser.END_TAG ->{
+                        Log.d(TAG, "parse: Ending tag for " + tagName)
+                        if(inEntry){
+                            when(tagName){
+                                //Selecting the content from each tag in XML file
+                                "entry" -> {
+                                    applications.add(currentRecord)
+                                    inEntry = false
+                                    currentRecord = FeedEntry() //Create a new object from the feedlist
+
+                                }
+                                "name" -> currentRecord.name = textValue
+                                "artist" -> currentRecord.artist = textValue
+                                "releaseDate" -> currentRecord.releaseDate = textValue
+                                "summary" -> currentRecord.summary = textValue
+                                "image" -> currentRecord.summary = textValue
+                            }
+
+                        }
+                    }
+                }
+            }
 
         }catch (e : Exception){
             e.printStackTrace()
@@ -34,9 +64,6 @@ class ParseApplications {
             status = false
         }
 
-
         return status
-
     }
-
 }

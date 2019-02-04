@@ -10,21 +10,19 @@ const val URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RS
 
 class FeedEntry{
 
-    //Data model for the data coming from the RSS Reed
-    var title : String = ""
-    var artist : String = ""
-    var summary : String = ""
-    var creator : String = ""
-    var releaseDat : String = ""
+    var name: String = ""
+    var artist: String = ""
+    var releaseDate: String = ""
+    var summary: String = ""
+    var imageURL: String = ""
 
     override fun toString(): String {
         return """
-            title = $title
+            name = $name
             artist = $artist
-            creator = $creator
-            releaseDat = $releaseDat
-            """.trimIndent()
-
+            releaseDate = $releaseDate
+            imageURL = $imageURL
+        """.trimIndent()
     }
 }
 
