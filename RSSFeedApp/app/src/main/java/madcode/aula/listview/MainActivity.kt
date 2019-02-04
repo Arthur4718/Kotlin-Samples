@@ -13,8 +13,7 @@ import kotlin.properties.Delegates
 
 const val URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
 
-class FeedEntry{
-
+class FeedEntry {
     var name: String = ""
     var artist: String = ""
     var releaseDate: String = ""
@@ -31,19 +30,28 @@ class FeedEntry{
     }
 }
 
+
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
+
+    //By lazy only makes the object initialization being delayend until it is used
+    private val downloadData by lazy { DownloadData(this, xmlListView)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "on Create called")
-        val downloadData = DownloadData(this, xmlListView)
         downloadData.execute(URL)
         Log.d(TAG, "on Create done")
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //Stop the task if the activity is being destroyed...
+        downloadData.cancel(true)
     }
 
     companion object {

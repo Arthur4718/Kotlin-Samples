@@ -49,9 +49,9 @@ class ParseApplications {
                                 //Geetting the fields from the XML file that we are interested
                                 "name" -> currentRecord.name = textValue
                                 "artist" -> currentRecord.artist = textValue
-                                "releaseDate" -> currentRecord.releaseDate = textValue
+                                "releasedate" -> currentRecord.releaseDate = textValue
                                 "summary" -> currentRecord.summary = textValue
-                                "image" -> currentRecord.summary = textValue
+                                "image" -> currentRecord.imageURL = textValue
                             }
 
                         }
