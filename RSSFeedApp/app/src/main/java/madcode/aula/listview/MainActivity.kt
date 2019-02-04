@@ -1,10 +1,15 @@
 package madcode.aula.listview
 
+import android.content.Context
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
+import kotlin.properties.Delegates
 
 const val URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
 
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "on Create called")
-        val downloadData = DownloadData()
+        val downloadData = DownloadData(this, xmlListView)
         downloadData.execute(URL)
         Log.d(TAG, "on Create done")
 
@@ -43,15 +48,28 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         //An async task is executed by another thread in the operating system
-        //We should actually avoid using this method, but this is just a sample code.
-        private class DownloadData: AsyncTask<String, Void, String>(){
+        //We should actually avoid using thi    s method, but this is just a sample code.
+        private class DownloadData(context : Context, listview : ListView): AsyncTask<String, Void, String>(){
             private val TAG = "DownloadData"
+
+            //Getting the parameters passing through class inicialization
+            var propContext : Context by Delegates.notNull()
+            var propListView : ListView by Delegates.notNull()
+
+            init{
+                //Creating the the properties by initialization
+                propContext = context
+                propListView = listview
+            }
 
             override fun onPostExecute(result: String) {
                 super.onPostExecute(result)
-//                Log.d(TAG, "OnPostExecute: parameter is $result")
+                Log.d(TAG, "OnPostExecute: parameter is $result")
                 val parserApplications = ParseApplications()
                 parserApplications.parse(result)
+                //Creating adapter
+                val arrayAdapter = ArrayAdapter<FeedEntry>(propContext, R.layout.list_item, parserApplications.applications)
+                propListView.adapter = arrayAdapter
             }
 
             override fun doInBackground(vararg url: String?): String {
