@@ -11,7 +11,7 @@ import java.net.URL
 import kotlin.properties.Delegates
 
 //A list of XML entries containing the top 10 free apps from apple store.
-const val FEED_URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+const val FEED_URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=200/xml"
 
 //Created a class to work as a data-model for the objects that we will be receiving from the feed.
 class FeedEntry {
@@ -81,14 +81,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "OnPostExecute: parameter is $result")
                 val parserApplications = ParseApplications()
                 parserApplications.parse(result)
-                //Creating adapter and fedding the list
-//                val arrayAdapter = ArrayAdapter<FeedEntry>(propContext, R.layout.list_item, parserApplications.applications)
-//                propListView.adapter = arrayAdapter
-<<<<<<< HEAD
 
-=======
->>>>>>> master
-                //Usinga custom Adapter and fedding the list
                 val feedAdapter = FeedAdapter(propContext, R.layout.list_record, parserApplications.applications)
                 propListView.adapter = feedAdapter
             }
