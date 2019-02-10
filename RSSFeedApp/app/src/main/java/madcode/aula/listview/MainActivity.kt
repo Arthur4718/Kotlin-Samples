@@ -5,13 +5,13 @@ import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ListView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 import kotlin.properties.Delegates
 
-//A list of XML entries containing the top 10 free apps from apple store.
-const val FEED_URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=200/xml"
 
 //Created a class to work as a data-model for the objects that we will be receiving from the feed.
 class FeedEntry {
@@ -37,18 +37,50 @@ class MainActivity : AppCompatActivity() {
     //Used as a stardard TAG to search for MainActivity actions in the LogCat
     private val TAG = "MainActivity"
 
-    //By lazy only makes the object initialization being delayed until it is used later
-    private val downloadData by lazy { DownloadData(this, xmlListView)}
+    private var downloadData : DownloadData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val baseurl : String = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
 
-        Log.d(TAG, "on Create called")
+        downloadUrl(baseurl)
+        Log.d(TAG, "on Create done: ")
+
+
+    }
+
+    //Called when its time to inflate te activity menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.feeds_menu, menu)
+        return true
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val feedUrl : String
+
+        when(item.itemId){
+            R.id.mnuFree ->
+                feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+            R.id.mnuPaid ->
+                feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=10/xml"
+            R.id.mnuSongs ->
+                feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=10/xml"
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
+        downloadUrl(feedUrl)
+        return true
+    }
+
+    private fun downloadUrl(feedUrl: String) {
+
+        Log.d(TAG, "download URL initiating async task")
         //Download the data from the http request with an async task - running alongside main thread
-        downloadData.execute(FEED_URL)
+        downloadData = DownloadData(this, xmlListView)
+        downloadData?.execute(feedUrl)
         Log.d(TAG, "on Create done")
-
 
     }
 
@@ -57,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         //preventing the app from crashing
         super.onDestroy()
         //Stop the task if the activity is being destroyed...
-        downloadData.cancel(true)
+        downloadData?.cancel(true)
     }
 
     companion object {
