@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import com.devarthur4718.kotlinsamples.Views.UserActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, UserActivity::class.java))
 
             finish()
 
