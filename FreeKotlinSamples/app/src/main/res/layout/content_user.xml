@@ -9,4 +9,6 @@
         tools:showIn="@layout/app_bar_user"
         tools:context=".Views.UserActivity">
 
+
+
 </android.support.constraint.ConstraintLayout>
