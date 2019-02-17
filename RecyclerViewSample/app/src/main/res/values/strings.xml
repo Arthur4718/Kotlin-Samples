@@ -6,4 +6,5 @@
     <string name="txtTituloPlace">Titulo</string>
     <string name="txtSubtituloPlace">Subtitulo</string>
     <string name="txtAction1">ACTION 1</string>
+    <string name="txtAction2">ACTION 2</string>
 </resources>
