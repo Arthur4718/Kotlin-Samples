@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import com.devarthur4718.kotlinsamples.Views.UserActivity
+//* Created by Arthur Gomes at 04/03/19 12:49 - contact me at devarthur4718@gmail.com.br
 
 class MainActivity : AppCompatActivity() {
 

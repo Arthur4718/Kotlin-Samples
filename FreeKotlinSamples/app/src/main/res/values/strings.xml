@@ -16,6 +16,19 @@
     <string name="menuItemShare">Share</string>
     <string name="menuitemRate">Rate this App.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Menu itens -->
+    <string name="menuItemOver">Overview</string>
+    <string name="menuSetup">Enviroment Setup</string>
+    <string name="menuArchitecture">Architecture</string>
+    <string name="menuBasicTypes">Basic Types</string>
+    <string name="menuBasicFlow">Control Flow</string>
+    <string name="menuClass">Class and Object</string>
+    <string name="menuConstructor">Constructors</string>
+    <string name="menuInheritance">Inheritance</string>
+    <string name="menuInterface">Interface</string>
+    <string name="menuVisibilityControl">Visibility Control</string>
+    <string name="menuExtension">Extension</string>
+    <string name="title_activity_item_detail">ItemDetail</string>
+    <string name="contentPlaceholder">Lorem Ipsum</string>
+
 </resources>
