@@ -29,6 +29,6 @@
     <string name="menuVisibilityControl">Visibility Control</string>
     <string name="menuExtension">Extension</string>
     <string name="title_activity_item_detail">ItemDetail</string>
-    <string name="contentPlaceholder">Lorem Ipsum</string>
+    <string name="contentPlaceholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non massa condimentum, mattis odio a, facilisis libero. Vestibulum malesuada vel neque eget ornare. Donec at massa mauris. Proin in arcu non orci ultricies ullamcorper et a nisi. Curabitur nec vestibulum leo. </string>
 
 </resources>
