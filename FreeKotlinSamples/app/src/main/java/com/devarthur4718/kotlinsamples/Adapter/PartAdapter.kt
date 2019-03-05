@@ -1,5 +1,7 @@
 package com.devarthur4718.kotlinsamples.Adapter
 
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.devarthur4718.kotlinsamples.DataModel.PartData
 import com.devarthur4718.kotlinsamples.R
+import com.devarthur4718.kotlinsamples.Views.ItemDetail
 import kotlinx.android.synthetic.main.recycler_list_item.view.*
 
 //* Created by Arthur Gomes at 04/03/19 15:57 - contact me at devarthur4718@gmail.com.br
@@ -40,7 +43,9 @@ class PartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.cardItem.setOnClickListener(View.OnClickListener {
             //Open detail activity
+            val intent = Intent(itemView.context, ItemDetail::class.java)
 
+            itemView.context.startActivity(intent)
         })
     }
 }
