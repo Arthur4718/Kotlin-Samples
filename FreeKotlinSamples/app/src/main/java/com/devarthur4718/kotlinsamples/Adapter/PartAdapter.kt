@@ -1,12 +1,10 @@
 package com.devarthur4718.kotlinsamples.Adapter
 
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.devarthur4718.kotlinsamples.DataModel.PartData
 import com.devarthur4718.kotlinsamples.R
 import com.devarthur4718.kotlinsamples.Views.ItemDetail
@@ -42,7 +40,7 @@ class PartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.tv_item_data.text = part.itemName
 
         itemView.cardItem.setOnClickListener(View.OnClickListener {
-            //Open detail activity
+
             val intent = Intent(itemView.context, ItemDetail::class.java)
 
             itemView.context.startActivity(intent)

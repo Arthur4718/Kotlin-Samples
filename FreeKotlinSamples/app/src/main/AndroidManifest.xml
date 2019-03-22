@@ -11,15 +11,24 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".Views.ItemDetail"
+                android:parentActivityName="com.devarthur4718.kotlinsamples.Views.SingleActivity"
                 android:label="@string/title_activity_item_detail"
                 android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.devarthur4718.kotlinsamples.Views.SingleActivity" />
+        </activity>
+        <activity
+
+                android:name=".Views.SingleActivity" >
         </activity>
         <activity
                 android:name=".Views.UserActivity"
                 android:label="@string/title_activity_user"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -1,7 +1,7 @@
 package com.devarthur4718.kotlinsamples.Views
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -9,9 +9,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 
 
+
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+
 import com.devarthur4718.kotlinsamples.Adapter.PartAdapter
 import com.devarthur4718.kotlinsamples.DataModel.PartData
 
@@ -109,6 +110,6 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun partItemClicked(partItem : PartData) {
-        Toast.makeText(this, "Clicked: ${partItem.itemName}", Toast.LENGTH_LONG).show()
+
     }
 }
